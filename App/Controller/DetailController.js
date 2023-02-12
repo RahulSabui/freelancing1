@@ -8,6 +8,7 @@ exports.createDetails = async (req, res) => {
     try {
         const role = req?.body?.role;
         const user_id = req?.body?.user_id;
+        const projectName = req?.body?.projectName;
         const startupsInvesting = req?.body?.startupsInvesting;
         const fName = req?.body?.fName;
         const lName = req?.body?.lName;
@@ -23,6 +24,7 @@ exports.createDetails = async (req, res) => {
         const jsonData = {
             role: role,
             user_id:user_id,
+            projectName:projectName,
             startupsInvesting: startupsInvesting,
             fName: fName,
             lName: lName,

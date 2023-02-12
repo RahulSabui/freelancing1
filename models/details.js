@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Details.init({
     role:DataTypes.STRING,
     user_id:DataTypes.INTEGER,
+    projectName:DataTypes.STRING,
     startupsInvesting:DataTypes.TEXT,
     fName:DataTypes.STRING,
     lName:DataTypes.STRING,

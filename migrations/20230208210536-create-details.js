@@ -22,6 +22,10 @@ module.exports = {
           key: 'id'
         },
       },
+      projectName: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
       startupsInvesting: {
         allowNull: true,
         type: Sequelize.TEXT
