@@ -35,7 +35,7 @@ exports.verifyToken = async(req, res) =>{
                 idToken: token,
                 audience: "977959450221-3dsvofuc5otbh632sua2ef6940lq8u37.apps.googleusercontent.com",
             });
-            
+
             const payload = ticket.getPayload();
             
             if (payload) {
@@ -88,3 +88,4 @@ exports.verifyToken = async(req, res) =>{
         })
     }
 }
+
