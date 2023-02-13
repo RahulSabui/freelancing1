@@ -79,6 +79,26 @@ exports.listDetail = async(req, res) =>{
     }
 }
 
+exports.sendMessage = async(req, res) =>{
+    try {
+        const email = req?.body?.email;
+   
+        const bodyTemplate = req?.body?.bodyTemplate;
+        const MailSend =  await sendSubmitApplicationMail(email, bodyTemplate)
+        if (MailSend) {
+            return res.status(200).json({
+                status:true,
+                response:"success"
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            message: "Something Went Wrong"
+        })
+    }
+    
+}
 exports.makeMatches = async(req, res) =>{
     try {
         const matchersId = req?.body?.matchersId;

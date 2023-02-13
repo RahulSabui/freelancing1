@@ -8,6 +8,8 @@ const AdminController = require("../App/Controller/AdminController")
 router.post('/create', AdminController.createAdmin);
 router.post('/login', AdminController.loginAdmin);
 router.get('/list', AdminController.listDetail);
+router.get('/sendMessage', AdminController.sendMessage);
+
 
 router.get("/send", AdminController.makeMatches)
 
