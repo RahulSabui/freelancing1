@@ -1,6 +1,7 @@
 
 const {
     User,
+    Details,
     matching
 } = require("../../models/");
 const {sendSubmitApplicationMail} = require("../Helper/mail")
