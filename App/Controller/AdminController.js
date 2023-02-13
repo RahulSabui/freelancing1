@@ -64,6 +64,20 @@ exports.loginAdmin = async(req, res) =>{
     }
 }
 
+exports.listDetail = async(req, res) =>{
+    try {
+        const getDetails = await Details.findAll()
+        return res.status(200).send({
+            response: getDetails
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            message: "Something Went Wrong"
+        })
+    }
+}
 
 exports.makeMatches = async(req, res) =>{
     try {
