@@ -49,7 +49,7 @@ exports.loginAdmin = async(req, res) =>{
                 })
 
         }else{
-            return res.status(200).json({
+            return res.status(400).json({
                 status:false,
                 response:"Unauthorized"
             })
