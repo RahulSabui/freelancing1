@@ -39,30 +39,52 @@ exports.verifyToken = async(req, res) =>{
             const payload = ticket.getPayload();
             
             if (payload) {
-                const UserExsits = await User.findOne({where:{email:email}})
+                const UserExsits = await User.findOne({where:{email:payload.email}})
                 if (UserExsits) {
                     return res.status(200).json({
                         isData:true,
                         status:true,
-                        message: "Verified"
+                        message: "Verified",
+                        statusCode:200
                     })
                 }else{
+                    // const checkUserExist = await User.findOne({where:{email:payload.email},raw:true,nest:true})
+                    // if (checkUserExist) {
+                    //      updatetUser = await User.update(Data,{where:{email:email}})
+                    // }else{
+                    // }
+                    const Data = {
+                        firstName:payload?.name,
+                        email:payload?.email
+                    }
+                    insertUser = await User.create(Data)
+                
+                    // if (insertUser ) {
+                    //     return res.status(200).send({
+                    //         Data:insertUser,
+                    //         message: "Data Saved Sucessfully !!"
+                    //     })
+                    // }
                     return res.status(200).json({
                         status:true,
-                        message: "Verified"
+                        message: "Verified",
+                        statusCode:200
                     })
                 }
                 
             }
         }else{
             return res.status(400).json({
-                message: "Please provide a valide token !"
+                message: "Please provide a valide token !",
+                statusCode:400
+
             })
         }
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            message: "Something went Wrong !"
+            message: "Something went Wrong !",
+            statusCode:500
         })
     }
 }

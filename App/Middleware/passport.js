@@ -1,8 +1,8 @@
+const { User } = require("../../models/")
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client("977959450221-3dsvofuc5otbh632sua2ef6940lq8u37.apps.googleusercontent.com");
 
-const {OAuth2Client} = require('google-auth-library');
-const client = new OAuth2Client("977959450221-3dsvofuc5otbh632sua2ef6940lq8u37.apps.googleusercontent.com");    
-
-exports.verifyUser = async(req, res, next) =>{
+exports.verifyUser = async (req, res, next) => {
     try {
         const token = req?.headers?.token
         if (token) {
@@ -13,16 +13,18 @@ exports.verifyUser = async(req, res, next) =>{
                 //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
             });
             const payload = ticket.getPayload();
-
-            req.User = payload;
+            const UserData = await User.findOne({ where: { email: payload.email } })
+            req.User = UserData;
+            console.log(UserData.id);
             next()
-        }else{
+        } else {
             return res.status(400).json({
                 message: "Please provide a valide token !"
             })
         }
-        
+
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
             message: "Something went Wrong !"
         })

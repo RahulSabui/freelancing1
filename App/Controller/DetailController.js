@@ -7,7 +7,7 @@ const {
 exports.createDetails = async (req, res) => {
     try {
         const role = req?.body?.role;
-        const user_id = req?.body?.user_id;
+        const user_id = req?.User.id;
         const projectName = req?.body?.projectName;
         const startupsInvesting = req?.body?.startupsInvesting;
         const fName = req?.body?.fName;
@@ -23,18 +23,18 @@ exports.createDetails = async (req, res) => {
 
         const jsonData = {
             role: role,
-            user_id:user_id,
-            projectName:projectName,
+            user_id: user_id,
+            projectName: projectName,
             startupsInvesting: startupsInvesting,
             fName: fName,
             lName: lName,
             email: email,
             linkdinId: linkdinId,
-            teamMembers:teamMembers,
+            teamMembers: teamMembers,
             additionalRead: additionalRead,
             profileImageUrl: profileImageUrl,
-            isAdmin:isAdmin,
-            isStarred:isStarred
+            isAdmin: isAdmin,
+            isStarred: isStarred
         }
 
         const getDetails = await Details.findOne({ where: { user_id: user_id } })
@@ -59,7 +59,9 @@ exports.createDetails = async (req, res) => {
 
 exports.getDetail = async (req, res) => {
     try {
-        const user_id = req?.params?.user_id;
+        const user_id = req?.User.id;
+        console.log(req?.User);
+        // const user_id = req?.params?.user_id;
         const getDetails = await Details.findOne({ where: { user_id: user_id } })
 
 
@@ -68,6 +70,7 @@ exports.getDetail = async (req, res) => {
         })
 
     } catch (error) {
+        console.log(error);
         return res.status(500).send({
             message: "Something Went Wrong"
         })
