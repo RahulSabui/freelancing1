@@ -8,6 +8,7 @@ const port = 8000
 const indexRouter = require('./Router/index');
 const DetailRouter = require('./Router/details');
 const userRouter = require("./Router/user")
+const adminRouter = require("./Router/admin")
 
 const whitelist =
   "http://localhost:3000,http://localhost:3001";
@@ -31,6 +32,8 @@ app.use(express.json({
 app.use('/api',indexRouter)
 app.use('/api/user',userRouter)
 app.use('/api',DetailRouter)
+app.use('/api/admin',adminRouter)
+
 
 
 app.listen(port, () => {

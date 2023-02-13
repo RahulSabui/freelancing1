@@ -6,6 +6,8 @@ const AdminController = require("../App/Controller/AdminController")
 
 
 router.post('/create', AdminController.createUser);
+router.post('/login', AdminController.loginAdmin);
+
 router.get("/send", AdminController.makeMatches)
 
 
