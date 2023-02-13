@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 exports.createAdmin = async(req, res) =>{
     try {
         const email = req?.body?.email;
-        const pass = bcrypt.hash(req?.body?.password);
+        const pass = bcrypt.hashSync(req?.body?.password, 10);
         const checkExist = await User.findOne({where:{email:email}})
         if (checkExist) {
             return res.status(200).json({
@@ -41,13 +41,13 @@ exports.loginAdmin = async(req, res) =>{
         const pass = req?.body?.password;
 
         const userCheck = await User.findOne({where:{email:email}})
-        if (userCheck) {
-            bcrypt.compare(pass, userCheck.password).then(function(result) {
+        if (userCheck.password == pass) {
+           
                 return res.status(200).json({
                     status:true,
                     response:"Login success"
                 })
-            });
+
         }else{
             return res.status(200).json({
                 status:false,
