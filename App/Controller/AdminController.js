@@ -91,6 +91,11 @@ exports.sendMessage = async(req, res) =>{
                 status:true,
                 response:"success"
             })
+        }else{
+            return res.status(200).json({
+                status:false,
+                response:"not success"
+            })
         }
     } catch (error) {
         console.log(error);
