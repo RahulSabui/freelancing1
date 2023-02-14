@@ -1,6 +1,7 @@
 
 const {
-    Details
+    Details,
+    matching
 } = require("../../models/")
 
 
@@ -60,7 +61,6 @@ exports.createDetails = async (req, res) => {
 exports.getDetail = async (req, res) => {
     try {
         const user_id = req?.User.id;
-        console.log(req?.User);
         // const user_id = req?.params?.user_id;
         const getDetails = await Details.findOne({ where: { user_id: user_id } })
 
@@ -77,4 +77,23 @@ exports.getDetail = async (req, res) => {
     }
 }
 
+exports.MatchersDetails = async(req, res) =>{
+    try {
+        let blankArr = []
+        const user_id = req?.User.id;
+        const Data = await matching.findAll({where:{matchingId:user_id}})
+        Data.forEach((element) => {
+            blankArr.push(element.matchersId)
+        });
+        const DetailsData =  await Details.findAll({where:{user_id:blankArr}})
+        return res.status(200).send({
+            response: DetailsData
+        })
 
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            message: "Something Went Wrong"
+        })
+    }
+}

@@ -105,6 +105,7 @@ exports.sendMessage = async(req, res) =>{
     }
     
 }
+
 exports.makeMatches = async(req, res) =>{
     try {
         const matchersId = req?.body?.matchersId;
@@ -118,14 +119,8 @@ exports.makeMatches = async(req, res) =>{
                 matchersId : matchersId,
                 matchingId : matchingId
             })
-
             await sendSubmitApplicationMail(matchingUserEmail?.email, bodyTemplate)
-        }else{
-
-            await sendSubmitApplicationMail(matchingUserEmail?.email, bodyTemplate)
-            
         }
-
         if (MailSend) {
             return res.status(200).json({
                 status:true,

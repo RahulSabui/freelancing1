@@ -41,9 +41,13 @@ exports.verifyToken = async(req, res) =>{
             if (payload) {
                 const UserExsits = await User.findOne({where:{email:payload.email}})
                 if (UserExsits) {
+                    
+                     const    onBoardingData = await Details.findOne({where:{user_id:UserData.id}})
                     return res.status(200).json({
                         isData:true,
                         status:true,
+                        isfilledUp:onBoardingData ? true: false,
+                        role: onBoardingData ? onBoardingData.role : "",
                         message: "Verified",
                         statusCode:200
                     })
@@ -88,4 +92,7 @@ exports.verifyToken = async(req, res) =>{
         })
     }
 }
+
+
+
 

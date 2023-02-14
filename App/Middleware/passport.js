@@ -1,4 +1,4 @@
-const { User } = require("../../models/")
+const { User,Details  } = require("../../models/")
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client("977959450221-3dsvofuc5otbh632sua2ef6940lq8u37.apps.googleusercontent.com");
 
