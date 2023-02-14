@@ -1,4 +1,4 @@
-const {User} = require("../../models/")
+const {User,Details} = require("../../models/")
 const {OAuth2Client} = require('google-auth-library');
 
 
@@ -42,7 +42,7 @@ exports.verifyToken = async(req, res) =>{
                 const UserExsits = await User.findOne({where:{email:payload.email}})
                 if (UserExsits) {
                     
-                     const    onBoardingData = await Details.findOne({where:{user_id:UserData.id}})
+                     const    onBoardingData = await Details.findOne({where:{user_id:UserExsits.id}})
                     return res.status(200).json({
                         isData:true,
                         status:true,
