@@ -28,21 +28,19 @@ exports.createUser =  async(req, res) =>{
 
 exports.verifyToken = async(req, res) =>{
     try {
-        const token = req?.headers?.token
-        const client = new OAuth2Client("977959450221-3dsvofuc5otbh632sua2ef6940lq8u37.apps.googleusercontent.com");
-        if (token) {
-            const ticket = await client.verifyIdToken({
-                idToken: token,
-                audience: "977959450221-3dsvofuc5otbh632sua2ef6940lq8u37.apps.googleusercontent.com",
-            });
+        const userJson = req?.body?.user
+        if (userJson) {
+            // const ticket = await client.verifyIdToken({
+            //     idToken: token,
+            //     audience: "977959450221-3dsvofuc5otbh632sua2ef6940lq8u37.apps.googleusercontent.com",
+            // });
 
-            const payload = ticket.getPayload();
+            // const payload = ticket.getPayload();
             
-            if (payload) {
-                const UserExsits = await User.findOne({where:{email:payload.email}})
+            if (userJson) {
+                const UserExsits = await User.findOne({where:{email:userJson.email}})
                 if (UserExsits) {
-                    
-                     const    onBoardingData = await Details.findOne({where:{user_id:UserData.id}})
+                    const onBoardingData = await Details.findOne({where:{user_id:UserData.id}})
                     return res.status(200).json({
                         isData:true,
                         status:true,
@@ -58,8 +56,8 @@ exports.verifyToken = async(req, res) =>{
                     // }else{
                     // }
                     const Data = {
-                        firstName:payload?.name,
-                        email:payload?.email
+                        firstName:UserExsits?.name,
+                        email:UserExsits?.email
                     }
                     insertUser = await User.create(Data)
                 
