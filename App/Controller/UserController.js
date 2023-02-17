@@ -40,7 +40,7 @@ exports.verifyToken = async(req, res) =>{
             if (userJson) {
                 const UserExsits = await User.findOne({where:{email:userJson.email}})
                 if (UserExsits) {
-                    const onBoardingData = await Details.findOne({where:{user_id:UserData.id}})
+                    const onBoardingData = await Details.findOne({where:{user_id:UserExsits.id}})
                     return res.status(200).json({
                         isData:true,
                         status:true,
