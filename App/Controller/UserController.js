@@ -1,4 +1,4 @@
-const {User} = require("../../models/")
+const {User,Details} = require("../../models/")
 const {OAuth2Client} = require('google-auth-library');
 
 

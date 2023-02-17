@@ -2,7 +2,7 @@
 const {
     User,
     Details,
-    matching
+    Matching
 } = require("../../models/");
 const {sendSubmitApplicationMail} = require("../Helper/mail")
 const bcrypt = require('bcrypt');
@@ -115,17 +115,17 @@ exports.makeMatches = async(req, res) =>{
         const matchingUserEmail = await User.findOne({id:matchingId})
 
         if (matchingId && matchersId) {
-            await matching.create({
+            await Matching.create({
                 matchersId : matchersId,
                 matchingId : matchingId
             })
-            await sendSubmitApplicationMail(matchingUserEmail?.email, bodyTemplate)
-        }
-        if (MailSend) {
-            return res.status(200).json({
-                status:true,
-                response:"success"
-            })
+            let MailSend= await sendSubmitApplicationMail(matchingUserEmail?.email, bodyTemplate)
+            if (MailSend) {
+                return res.status(200).json({
+                    status:true,
+                    response:"success"
+                })
+            }
         }
 
     } catch (error) {

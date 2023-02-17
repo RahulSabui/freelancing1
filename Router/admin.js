@@ -11,7 +11,7 @@ router.get('/list', AdminController.listDetail);
 router.post('/sendMessage', AdminController.sendMessage);
 
 
-router.get("/send", AdminController.makeMatches)
+router.post("/send", AdminController.makeMatches)
 
 
 module.exports = router;

@@ -1,7 +1,7 @@
 
 const {
     Details,
-    matching
+    Matching
 } = require("../../models/")
 
 
@@ -81,10 +81,12 @@ exports.MatchersDetails = async(req, res) =>{
     try {
         let blankArr = []
         const user_id = req?.User.id;
-        const Data = await matching.findAll({where:{matchingId:user_id}})
+        const Data = await Matching.findAll({where:{matchersId:user_id}})
+        console.log(Data);
         Data.forEach((element) => {
-            blankArr.push(element.matchersId)
+            blankArr.push(element.matchingId)
         });
+        console.log(blankArr);
         const DetailsData =  await Details.findAll({where:{user_id:blankArr}})
         return res.status(200).send({
             response: DetailsData
